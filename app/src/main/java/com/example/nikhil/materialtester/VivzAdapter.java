@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,11 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
     List<Information> data = Collections.EMPTY_LIST;
     Context context;
 
+    public void delete(int position){
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public VivzAdapter(Context context,List<Information> data){
         inflater = LayoutInflater.from(context);
         this.data =data;
@@ -30,27 +36,18 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_row,parent,false);
+        View view = inflater.inflate(R.layout.custom_row, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         Log.v("Nikhil debug","onCreateViewHolder is called");
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(MyViewHolder holder,int position) {
         Information current = data.get(position);
         holder.title.setText(current.name);
         holder.image.setImageResource(current.iconid);
         Log.v("Nikhil debug", "onBind ViewHolder is called at position " + position);
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,"You clicked at position "+position,Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
     }
 
     @Override
@@ -58,14 +55,24 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
         return data.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title;
         ImageView image;
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.custom_text);
             image = (ImageView) itemView.findViewById(R.id.custom_img);
+            title.setOnClickListener(this);
 
+        }
+
+
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context,"The position is "+getPosition() ,Toast.LENGTH_LONG).show();
+            delete(getPosition());
         }
     }
 }
