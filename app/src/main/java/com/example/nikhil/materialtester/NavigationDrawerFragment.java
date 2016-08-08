@@ -69,14 +69,32 @@ public class NavigationDrawerFragment extends Fragment {
                 R.drawable.eclair,
                 R.drawable.froyo,
                 R.drawable.gingerbread,
-                R.drawable.honeycomb,
-                R.drawable.icecream,
-                R.drawable.jellybean,
-                R.drawable.kitkat,
-                R.drawable.lollipop,
+                R.drawable.cupcake,
+                R.drawable.donut,
+                R.drawable.eclair,
+                R.drawable.froyo,
+                R.drawable.gingerbread,
+                R.drawable.cupcake,
+                R.drawable.donut,
+                R.drawable.eclair,
+                R.drawable.froyo,
+                R.drawable.gingerbread,
 
         };
-        String[] titles = { "donut","eclair","froyo","gingerbread","honeycomb","icecream","jellybean","kitkat","lollipop" };
+        String[] titles = { "donut",
+                "eclair",
+                "froyo",
+                "gingerbread",
+                "donut",
+                "eclair",
+                "froyo",
+                "gingerbread",
+                "donut",
+                "eclair",
+                "froyo",
+                "gingerbread"
+        };
+
         for (int i = 0; i< titles.length;i++){
             Information current = new Information();
             current.name = titles[i];
