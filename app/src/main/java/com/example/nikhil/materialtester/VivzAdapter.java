@@ -1,6 +1,7 @@
 package com.example.nikhil.materialtester;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,16 +64,14 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.custom_text);
             image = (ImageView) itemView.findViewById(R.id.custom_img);
-            title.setOnClickListener(this);
+            itemView.setOnClickListener(this);
 
         }
 
-
-
         @Override
         public void onClick(View v) {
-            Toast.makeText(context,"The position is "+getPosition() ,Toast.LENGTH_LONG).show();
-            delete(getPosition());
+            Intent intent= new Intent(context,SubActivity.class);
+            context.startActivity(intent);
         }
     }
 }
