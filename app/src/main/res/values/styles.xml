@@ -14,8 +14,8 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorPrimary">#2E294E</item>
-        <item name="android:textColorSecondary">#2E294E</item>
+        <item name="android:textColorPrimary">#F1F7ED</item>
+        <item name="android:textColorSecondary">#E0EEC6</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
