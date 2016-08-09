@@ -1,6 +1,7 @@
 package com.example.nikhil.materialtester;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements VivzAdapter.ClickListener{
 
 
     private RecyclerView recyclerView;
@@ -56,7 +57,9 @@ public class NavigationDrawerFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler);
         adapter = new VivzAdapter(getActivity(),getData());
+        adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return layout;
@@ -150,5 +153,10 @@ public class NavigationDrawerFragment extends Fragment {
     public static String readFromPreferences(Context context,String PreferenceName, String defaultValue){
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(PreferenceName,defaultValue);
+    }
+
+    @Override
+    public void itemclick(View v, int position) {
+        startActivity(new Intent(getActivity(),SubActivity.class));
     }
 }

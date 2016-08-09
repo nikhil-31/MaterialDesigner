@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> {
     private LayoutInflater inflater;
+    private ClickListener clickListener;
     List<Information> data = Collections.EMPTY_LIST;
     Context context;
 
@@ -56,6 +57,8 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
         return data.size();
     }
 
+    public
+
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title;
@@ -64,14 +67,23 @@ public class VivzAdapter extends RecyclerView.Adapter<VivzAdapter.MyViewHolder> 
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.custom_text);
             image = (ImageView) itemView.findViewById(R.id.custom_img);
-            itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent= new Intent(context,SubActivity.class);
+            Intent intent = new Intent(context,SubActivity.class);
             context.startActivity(intent);
+            if(clickListener!= null){
+                clickListener.itemclick(v,getPosition());
+            }
         }
+    }
+
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener=clickListener;
+    }
+
+    public interface ClickListener{
+        void itemclick(View v,int position);
     }
 }
