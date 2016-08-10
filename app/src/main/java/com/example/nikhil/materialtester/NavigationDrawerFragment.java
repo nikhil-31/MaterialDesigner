@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NavigationDrawerFragment extends Fragment implements VivzAdapter.ClickListener{
+public class NavigationDrawerFragment extends Fragment {
 
 
     private RecyclerView recyclerView;
@@ -57,7 +57,7 @@ public class NavigationDrawerFragment extends Fragment implements VivzAdapter.Cl
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler);
         adapter = new VivzAdapter(getActivity(),getData());
-        adapter.setClickListener(this);
+
         recyclerView.setAdapter(adapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -155,8 +155,5 @@ public class NavigationDrawerFragment extends Fragment implements VivzAdapter.Cl
         return sharedPreferences.getString(PreferenceName,defaultValue);
     }
 
-    @Override
-    public void itemclick(View v, int position) {
-        startActivity(new Intent(getActivity(),SubActivity.class));
-    }
+
 }
