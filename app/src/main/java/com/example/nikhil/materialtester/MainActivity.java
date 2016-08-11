@@ -3,6 +3,7 @@ package com.example.nikhil.materialtester;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -26,11 +27,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nikhil.materialtester.tabs.SlidingTabLayout;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private SlidingTabLayout mTabs;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,23 +62,23 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
         mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         mTabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
-        mTabs.setDistributeEvenly(true);
-        mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.colorAccent);
-            }
-        });
 
+
+        mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
+        mTabs.setDistributeEvenly(true);
         mTabs.setViewPager(mViewPager);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -90,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.navigate){
-            Intent intent = new Intent(this,SubActivity.class);
+        if (id == R.id.navigate) {
+            Intent intent = new Intent(this, SubActivity.class);
             startActivity(intent);
 
 
@@ -99,15 +108,57 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public class MyPagerAdapter extends FragmentPagerAdapter{
 
-        int[] icons = {R.drawable.mostpopular,R.drawable.toprated,R.drawable.favourite};
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        String[] tabs= getResources().getStringArray(R.array.tabs);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.example.nikhil.materialtester/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.example.nikhil.materialtester/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+
+        int[] icons = {R.drawable.mostpopular, R.drawable.toprated, R.drawable.favourite};
+
+        String[] tabs = getResources().getStringArray(R.array.tabs);
+
         public MyPagerAdapter(FragmentManager fm) {
 
             super(fm);
-            tabs= getResources().getStringArray(R.array.tabs);
+            tabs = getResources().getStringArray(R.array.tabs);
         }
 
         @Override
@@ -120,10 +171,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             Drawable drawable = getResources().getDrawable(icons[position]);
-            drawable.setBounds(0,0,36,36);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, 64, 64);
+            }
             ImageSpan imageSpan = new ImageSpan(drawable);
             SpannableString spannableString = new SpannableString(" ");
-            spannableString.setSpan(imageSpan,0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return spannableString;
         }
 
@@ -132,13 +185,15 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
     }
-    public static class MyFragment extends Fragment{
+
+    public static class MyFragment extends Fragment {
 
         private TextView textView;
-        public static MyFragment getInstance(int position){
+
+        public static MyFragment getInstance(int position) {
             MyFragment myFragment = new MyFragment();
             Bundle args = new Bundle();
-            args.putInt("position",position);
+            args.putInt("position", position);
             myFragment.setArguments(args);
             return myFragment;
 
@@ -147,11 +202,11 @@ public class MainActivity extends AppCompatActivity {
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View layout = inflater.inflate(R.layout.fragment_my,container,false);
+            View layout = inflater.inflate(R.layout.fragment_my, container, false);
             textView = (TextView) layout.findViewById(R.id.text_my);
             Bundle bundle = getArguments();
-            if(bundle != null){
-                textView.setText("The page currently selected is "+bundle.getInt("position"));
+            if (bundle != null) {
+                textView.setText("The page currently selected is " + bundle.getInt("position"));
 
             }
             return layout;
