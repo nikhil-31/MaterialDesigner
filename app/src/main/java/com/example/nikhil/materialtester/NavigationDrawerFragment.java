@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import com.example.nikhil.materialtester.Information;
+import com.example.nikhil.materialtester.R;
+import com.example.nikhil.materialtester.VivzAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 

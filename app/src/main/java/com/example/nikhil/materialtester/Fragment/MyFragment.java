@@ -1,6 +1,5 @@
-package com.example.nikhil.materialtester;
+package com.example.nikhil.materialtester.Fragment;
 
-import android.app.DownloadManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.nikhil.materialtester.R;
 import com.example.nikhil.materialtester.network.VolleySingleton;
 
 /**

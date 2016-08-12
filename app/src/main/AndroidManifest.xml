@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubActivity"
+            android:name=".Activity.SubActivity"
             android:label="@string/title_activity_sub"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Activity.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nikhil.materialtester.MainActivity" />
+                android:value=".Activity.MainActivity" />
         </activity>
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -38,13 +38,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ActivityUsingTabLibrary"
+            android:name=".Activity.ActivityUsingTabLibrary"
             android:label="@string/title_activity_activity_using_tab_library"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Activity.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nikhil.materialtester.MainActivity" />
+                android:value=".Activity.MainActivity" />
         </activity>
     </application>
 

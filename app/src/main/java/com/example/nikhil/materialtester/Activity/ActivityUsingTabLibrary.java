@@ -1,4 +1,4 @@
-package com.example.nikhil.materialtester;
+package com.example.nikhil.materialtester.Activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.view.View;
+
+import com.example.nikhil.materialtester.Fragment.MyFragment;
+import com.example.nikhil.materialtester.R;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;

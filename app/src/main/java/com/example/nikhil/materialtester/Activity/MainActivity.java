@@ -1,16 +1,13 @@
-package com.example.nikhil.materialtester;
+package com.example.nikhil.materialtester.Activity;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,16 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.example.nikhil.materialtester.Fragment.FragmentFavourities;
+import com.example.nikhil.materialtester.Fragment.FragmentPopular;
+import com.example.nikhil.materialtester.Fragment.FragmentTopRated;
+import com.example.nikhil.materialtester.NavigationDrawerFragment;
+import com.example.nikhil.materialtester.R;
 import com.example.nikhil.materialtester.tabs.SlidingTabLayout;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -35,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private SlidingTabLayout mTabs;
+    private static final int MOVIE_POPULAR = 0;
+    private static final int MOVIE_TOPRATED = 1;
+    private static final int MOVIE_FAVOURITE =2;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -68,13 +68,14 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
         mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+
         mTabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
-
-
         mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mTabs.setDistributeEvenly(true);
         mTabs.setViewPager(mViewPager);
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -110,8 +111,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    public class MyPagerAdapter extends FragmentPagerAdapter {
+    //Using Fragment state pager adapter because it will save the state and not discard it
+    //If we were using the FragmentPagerAdapter the onsave instance will have never been called in the
+    //Fragments
+    public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
         int[] icons = {R.drawable.mostpopular1, R.drawable.toprated2, R.drawable.favourite2};
 
@@ -125,9 +128,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            MyFragment myFragment = MyFragment.getInstance(position);
+            Fragment fragment = null;
+            switch (position){
+                case MOVIE_POPULAR:
+                    fragment = FragmentPopular.newInstance("","");
+                    break;
+                case MOVIE_TOPRATED:
+                    fragment = FragmentTopRated.newInstance("", "");
+                    break;
+                case MOVIE_FAVOURITE:
+                    fragment = FragmentFavourities.newInstance("", "");
+                    break;
 
-            return myFragment;
+            }
+            return fragment;
         }
 
         @Override

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.nikhil.materialtester.ActivityUsingTabLibrary"
+    tools:context=".Activity.ActivityUsingTabLibrary"
     tools:showIn="@layout/activity_activity_using_tab_library">
 
     <android.support.design.widget.AppBarLayout
