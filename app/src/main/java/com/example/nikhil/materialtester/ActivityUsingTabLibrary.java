@@ -30,10 +30,6 @@ public class ActivityUsingTabLibrary extends AppCompatActivity implements Materi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +70,7 @@ public class ActivityUsingTabLibrary extends AppCompatActivity implements Materi
 
     @Override
     public void onTabReselected(MaterialTab tab) {
+
 
     }
 

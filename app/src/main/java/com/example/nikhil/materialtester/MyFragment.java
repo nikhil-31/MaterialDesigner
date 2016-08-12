@@ -1,5 +1,6 @@
 package com.example.nikhil.materialtester;
 
+import android.app.DownloadManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 /**
  * Created by nikhil on 12-08-2016.
@@ -34,6 +44,22 @@ public class MyFragment extends Fragment {
             textView.setText("The page currently selected is " + bundle.getInt("position"));
 
         }
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest request = new StringRequest(Request.Method.GET, "http://php.net", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity(),"RESPONSE",Toast.LENGTH_LONG).show();
+            }
+        }, new ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(),"ERROR",Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(request);
+
+
         return layout;
     }
 }
