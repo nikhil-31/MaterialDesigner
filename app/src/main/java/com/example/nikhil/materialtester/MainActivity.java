@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.navigate) {
-            Intent intent = new Intent(this, SubActivity.class);
+            Intent intent = new Intent(this, ActivityUsingTabLibrary.class);
             startActivity(intent);
 
 
@@ -109,49 +109,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.nikhil.materialtester/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.nikhil.materialtester/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
-        int[] icons = {R.drawable.mostpopular, R.drawable.toprated, R.drawable.favourite};
+        int[] icons = {R.drawable.mostpopular1, R.drawable.toprated2, R.drawable.favourite2};
 
         String[] tabs = getResources().getStringArray(R.array.tabs);
 
@@ -186,31 +147,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static class MyFragment extends Fragment {
 
-        private TextView textView;
-
-        public static MyFragment getInstance(int position) {
-            MyFragment myFragment = new MyFragment();
-            Bundle args = new Bundle();
-            args.putInt("position", position);
-            myFragment.setArguments(args);
-            return myFragment;
-
-        }
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View layout = inflater.inflate(R.layout.fragment_my, container, false);
-            textView = (TextView) layout.findViewById(R.id.text_my);
-            Bundle bundle = getArguments();
-            if (bundle != null) {
-                textView.setText("The page currently selected is " + bundle.getInt("position"));
-
-            }
-            return layout;
-        }
-    }
 
 }
