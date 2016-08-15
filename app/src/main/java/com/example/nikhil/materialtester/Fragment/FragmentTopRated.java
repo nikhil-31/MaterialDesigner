@@ -34,6 +34,7 @@ public class FragmentTopRated extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String STATE_MOVIES_TOP = "movie_state_top";
 
 
     private String mParam1;
@@ -80,9 +81,22 @@ public class FragmentTopRated extends Fragment {
         listMovieHits.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         adapter = new PopularAdapter(getActivity());
         listMovieHits.setAdapter(adapter);
-        sendJsonRequest();
+        if(savedInstanceState !=null){
+            ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES_TOP);
+            adapter.setMoviesList(ListMovies);
+        }
+        else {
+            sendJsonRequest();
+        }
+
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(STATE_MOVIES_TOP,ListMovies);
     }
 
     private void sendJsonRequest() {
