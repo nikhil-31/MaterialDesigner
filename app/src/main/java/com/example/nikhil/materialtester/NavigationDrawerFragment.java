@@ -31,7 +31,7 @@ public class NavigationDrawerFragment extends Fragment {
     private VivzAdapter adapter;
 
     public static final String PREF_FILE_NAME = "testpref";
-    public static final String KEY_USER_LEARNED_DRAWER ="user_learned_drawer";
+    public static final String KEY_USER_LEARNED_DRAWER = "user_learned_drawer";
 
     private ActionBarDrawerToggle mdrawerToggle;
     private DrawerLayout mDrawerlayout;
@@ -47,9 +47,9 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserLearnedDrawer = Boolean.valueOf(readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER,"false" ));
-        if(savedInstanceState !=null){
-            mFromSavedInstaneState=true;
+        mUserLearnedDrawer = Boolean.valueOf(readFromPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, "false"));
+        if (savedInstanceState != null) {
+            mFromSavedInstaneState = true;
         }
 
     }
@@ -60,7 +60,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler);
-        adapter = new VivzAdapter(getActivity(),getData());
+        adapter = new VivzAdapter(getActivity(), getData());
 
         recyclerView.setAdapter(adapter);
 
@@ -69,40 +69,16 @@ public class NavigationDrawerFragment extends Fragment {
         return layout;
     }
 
-    public static List<Information> getData(){
+    public static List<Information> getData() {
         List<Information> data = new ArrayList<>();
-        int[] icon = { R.drawable.cupcake,
-                R.drawable.donut,
-                R.drawable.eclair,
-                R.drawable.froyo,
-                R.drawable.gingerbread,
-                R.drawable.cupcake,
-                R.drawable.donut,
-                R.drawable.eclair,
-                R.drawable.froyo,
-                R.drawable.gingerbread,
-                R.drawable.cupcake,
-                R.drawable.donut,
-                R.drawable.eclair,
-                R.drawable.froyo,
-                R.drawable.gingerbread,
+        int[] icon = {R.drawable.cupcake,
+
 
         };
-        String[] titles = { "donut",
-                "eclair",
-                "froyo",
-                "gingerbread",
-                "donut",
-                "eclair",
-                "froyo",
-                "gingerbread",
-                "donut",
-                "eclair",
-                "froyo",
-                "gingerbread"
+        String[] titles = {"Wooo A navigation Drawer",
         };
 
-        for (int i = 0; i< titles.length;i++){
+        for (int i = 0; i < titles.length; i++) {
             Information current = new Information();
             current.name = titles[i];
             current.iconid = icon[i];
@@ -111,17 +87,17 @@ public class NavigationDrawerFragment extends Fragment {
         return data;
     }
 
-    public void setUp(int fragmentid,DrawerLayout drawerLayout, android.support.v7.widget.Toolbar toolbar) {
-        containerView=getActivity().findViewById(fragmentid);
+    public void setUp(int fragmentid, DrawerLayout drawerLayout, android.support.v7.widget.Toolbar toolbar) {
+        containerView = getActivity().findViewById(fragmentid);
         mDrawerlayout = drawerLayout;
-        mdrawerToggle = new ActionBarDrawerToggle(getActivity(),drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
+        mdrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                    if(!mUserLearnedDrawer){
-                        mUserLearnedDrawer=true;
-                        saveToPreferences(getActivity(),KEY_USER_LEARNED_DRAWER,mUserLearnedDrawer+" ");
-                    }
+                if (!mUserLearnedDrawer) {
+                    mUserLearnedDrawer = true;
+                    saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + " ");
+                }
                 getActivity().invalidateOptionsMenu();
 
             }
@@ -133,7 +109,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             }
         };
-        if(!mUserLearnedDrawer && !mFromSavedInstaneState){
+        if (!mUserLearnedDrawer && !mFromSavedInstaneState) {
             mDrawerlayout.openDrawer(containerView);
 
         }
@@ -148,15 +124,16 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
 
-    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
+    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(preferenceName,preferenceValue);
+        editor.putString(preferenceName, preferenceValue);
         editor.apply();
     }
-    public static String readFromPreferences(Context context,String PreferenceName, String defaultValue){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getString(PreferenceName,defaultValue);
+
+    public static String readFromPreferences(Context context, String PreferenceName, String defaultValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(PreferenceName, defaultValue);
     }
 
 
