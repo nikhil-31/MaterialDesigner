@@ -3,6 +3,7 @@ package com.example.nikhil.materialtester.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -80,7 +81,7 @@ public class FragmentPopular extends Fragment {
         View view = inflater.inflate(R.layout.fragment_popular, container, false);
 
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_popular);
-        listMovieHits.setLayoutManager(new LinearLayoutManager(getActivity()));
+        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(),2));
         adapter = new PopularAdapter(getActivity());
         listMovieHits.setAdapter(adapter);
         sendJsonRequest();

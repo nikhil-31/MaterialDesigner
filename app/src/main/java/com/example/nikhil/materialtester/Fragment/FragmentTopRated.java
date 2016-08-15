@@ -3,8 +3,10 @@ package com.example.nikhil.materialtester.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +77,7 @@ public class FragmentTopRated extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_rated, container, false);
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_top_rated);
-        listMovieHits.setLayoutManager(new LinearLayoutManager(getActivity()));
+        listMovieHits.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         adapter = new PopularAdapter(getActivity());
         listMovieHits.setAdapter(adapter);
         sendJsonRequest();
