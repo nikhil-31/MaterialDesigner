@@ -35,6 +35,7 @@ public class FragmentPopular extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String STATE_MOVIE = "state_movies";
 
 
     private String mParam1;
@@ -84,8 +85,21 @@ public class FragmentPopular extends Fragment {
         listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(),2));
         adapter = new PopularAdapter(getActivity());
         listMovieHits.setAdapter(adapter);
-        sendJsonRequest();
+        if(savedInstanceState != null){
+            ListMovies=savedInstanceState.getParcelableArrayList(STATE_MOVIE);
+            adapter.setMoviesList(ListMovies);
+        }
+        else {
+            sendJsonRequest();
+        }
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(STATE_MOVIE,ListMovies);
     }
 
     private void sendJsonRequest(){

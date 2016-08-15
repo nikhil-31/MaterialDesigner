@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by nikhil on 02-07-2016.
  */
-public class Movie {
+public class Movie implements Parcelable {
     private String mOriginalTitle;
     private String mPosterPath;
     private String mOverview;
@@ -81,4 +81,42 @@ public class Movie {
                 "Poster Path"+mPosterPath+
                 "overview"+mOverview;
     }
+
+    @Override
+    public int describeContents() {
+        return  0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mOriginalTitle);
+        dest.writeString(mPosterPath);
+        dest.writeString(mOverview);
+        dest.writeValue(mVoteAverage);
+        dest.writeString(mReleaseDate);
+        dest.writeString(mBackdrop);
+
+    }
+
+    private Movie(Parcel in) {
+        mOriginalTitle = in.readString();
+        mPosterPath = in.readString();
+        mOverview = in.readString();
+        mVoteAverage = (Float) in.readValue(Double.class.getClassLoader());
+        mReleaseDate = in.readString();
+        mBackdrop = in.readString();
+    }
+
+
+    public static final Parcelable.Creator<Movie> CREATOR
+            = new Parcelable.Creator<Movie>() {
+        public Movie createFromParcel(Parcel in) {
+
+            return new Movie(in);
+        }
+
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }
