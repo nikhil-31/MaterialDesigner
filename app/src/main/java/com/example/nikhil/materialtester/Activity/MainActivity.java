@@ -142,14 +142,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Drawable drawable = getResources().getDrawable(icons[position]);
-            if (drawable != null) {
-                drawable.setBounds(0, 0, 64, 64);
-            }
-            ImageSpan imageSpan = new ImageSpan(drawable);
-            SpannableString spannableString = new SpannableString(" ");
-            spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return spannableString;
+//            Drawable drawable = getResources().getDrawable(icons[position]);
+//            if (drawable != null) {
+//                drawable.setBounds(0, 0, 64, 64);
+//            }
+//            ImageSpan imageSpan = new ImageSpan(drawable);
+//            SpannableString spannableString = new SpannableString(" ");
+//            spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return getResources().getStringArray(R.array.tabs)[position];
+
         }
 
         @Override
