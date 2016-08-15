@@ -118,7 +118,7 @@ public class FragmentTopRated extends Fragment {
         }
 
         JSONArray results = response.getJSONArray("results");
-        StringBuilder builder = new StringBuilder();
+
 
         for (int i = 0; i < results.length(); i++) {
             Movie current = new Movie();
