@@ -6,7 +6,7 @@
         android:title="next"
         android:orderInCategory="200"
         android:icon="@drawable/nextdarkblue"
-        app:showAsAction="always" >
+        app:showAsAction="never" >
 
     </item>
 

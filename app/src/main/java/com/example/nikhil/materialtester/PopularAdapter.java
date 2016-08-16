@@ -65,6 +65,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
         public MyViewHolder(View itemview) {
             super(itemview);
+
             image = (ImageView) itemview.findViewById(R.id.popular_image);
             text = (TextView) itemview.findViewById(R.id.popular_text);
 
