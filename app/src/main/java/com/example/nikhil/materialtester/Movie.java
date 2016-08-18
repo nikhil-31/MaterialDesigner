@@ -74,7 +74,7 @@ public class Movie implements Parcelable {
     public String getReleaseDate() {
         return mReleaseDate;
     }
-
+    //Just to return data
     @Override
     public String toString() {
         return "Title"+mOriginalTitle+

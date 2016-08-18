@@ -1,13 +1,16 @@
 package com.example.nikhil.materialtester;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.nikhil.materialtester.Activity.SubActivity;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -25,19 +28,19 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     Context context;
     private LayoutInflater inflater;
 
-    public PopularAdapter(Context context){
+    public PopularAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
-    public void setMoviesList(ArrayList<Movie> listmovies){
+    public void setMoviesList(ArrayList<Movie> listmovies) {
         this.mMovie = listmovies;
-        notifyItemRangeChanged(0,listmovies.size());
+        notifyItemRangeChanged(0, listmovies.size());
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.custom_grid_popular,parent,false);
+        View v = inflater.inflate(R.layout.custom_grid_popular, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(v);
 
         return myViewHolder;
@@ -51,6 +54,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
         Picasso.with(context)
                 .load(currentMovie.getPosterPath())
                 .into(holder.image);
+
+
     }
 
     @Override
@@ -59,7 +64,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     }
 
 
-     static class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView image;
         TextView text;
 
@@ -68,8 +73,14 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
             image = (ImageView) itemview.findViewById(R.id.popular_image);
             text = (TextView) itemview.findViewById(R.id.popular_text);
+            itemview.setOnClickListener(this);
 
         }
 
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context, "Position " + getAdapterPosition(),Toast.LENGTH_LONG).show();
+            context.startActivity(new Intent(context, SubActivity.class));
+        }
     }
 }
