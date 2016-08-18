@@ -1,6 +1,7 @@
 package com.example.nikhil.materialtester.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.nikhil.materialtester.Activity.MovieDetailsActivity;
+import com.example.nikhil.materialtester.Activity.SubActivity;
 import com.example.nikhil.materialtester.Movie;
 import com.example.nikhil.materialtester.PopularAdapter;
 import com.example.nikhil.materialtester.R;
@@ -31,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentPopular extends Fragment {
+public class FragmentPopular extends Fragment implements PopularAdapter.ClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -84,6 +87,7 @@ public class FragmentPopular extends Fragment {
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_popular);
         listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(),2));
         adapter = new PopularAdapter(getActivity());
+        adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
         if(savedInstanceState != null){
             ListMovies=savedInstanceState.getParcelableArrayList(STATE_MOVIE);
@@ -100,6 +104,7 @@ public class FragmentPopular extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(STATE_MOVIE,ListMovies);
+
     }
 
     private void sendJsonRequest(){
@@ -158,6 +163,14 @@ public class FragmentPopular extends Fragment {
     }
 
 
+    @Override
+    public void itemClicked(View view, int position) {
+
+        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
+        intent.putParcelableArrayListExtra("Movie",ListMovies);
+        startActivity(intent);
+
+    }
 }
 
 

@@ -17,5 +17,6 @@
         <item>TAB 6</item>
     </string-array>
     <string name="title_activity_activity_using_tab_library">ActivityUsingTabLibrary</string>
+    <string name="title_activity_movie_details">MovieDetailsActivity</string>
 
 </resources>

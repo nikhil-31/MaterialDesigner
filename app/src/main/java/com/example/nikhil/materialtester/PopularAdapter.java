@@ -25,7 +25,8 @@ import java.util.List;
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHolder> {
 
     private ArrayList<Movie> mMovie = new ArrayList<Movie>();
-    Context context;
+    private Context context;
+    private ClickListener clickListener;
     private LayoutInflater inflater;
 
     public PopularAdapter(Context context) {
@@ -79,8 +80,18 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "Position " + getAdapterPosition(),Toast.LENGTH_LONG).show();
-            context.startActivity(new Intent(context, SubActivity.class));
+
+
+            if (clickListener !=null){
+                clickListener.itemClicked(v,getAdapterPosition());
+            }
         }
+    }
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener{
+        void itemClicked(View view,int position);
     }
 }
