@@ -43,14 +43,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
 //        });
 
 
-//
-        ImageView poster = (ImageView) findViewById(R.id.poster1);
-//        TextView releaseDate = (TextView) findViewById(R.id.Release_write);
-//        TextView rating = (TextView) findViewById(R.id.Rating_write);
+
+        ImageView poster = (ImageView) findViewById(R.id.poster_details);
+        TextView releaseDate = (TextView) findViewById(R.id.Release_write);
+        TextView rating = (TextView) findViewById(R.id.Rating_write);
 //        TextView title = (TextView) findViewById(R.id.Title_write);
         TextView overview = (TextView) findViewById(R.id.overview_new);
         ImageView backdrop = (ImageView) findViewById(R.id.backdrop1);
-//
+
         Picasso.with(this)
                 .load(movie.getPosterPath())
                 .into(poster);
@@ -59,12 +59,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 .load(movie.getBackdrop())
                 .into(backdrop);
 
-//        releaseDate.setText(movie.getReleaseDate());
-//
-//        rating.setText(movie.getVoteAverage());
-//
+        releaseDate.setText(movie.getReleaseDate());
+
+        rating.setText(movie.getVoteAverage());
+
 //        title.setText(movie.getOriginalTitle());
-//
+
         overview.setText(movie.getOverview());
 
 
