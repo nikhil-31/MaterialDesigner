@@ -25,7 +25,8 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
 
             <ImageView
                 android:id="@+id/backdrop1"
@@ -70,14 +71,25 @@
                     android:layout_height="200dp" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Title_write"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+
+                    android:layout_toRightOf="@+id/poster_details"/>
+
+                <TextView
                     android:id="@+id/Release_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
-                    android:paddingTop="50dp"
+                    android:layout_below="@id/Title_write"
+                    android:paddingTop="10dp"
                     android:text="Release Date"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                     />
 
                 <TextView
                     android:id="@+id/Release_write"
@@ -88,6 +100,8 @@
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:text="31-2-2224" />
+
+
 
 
             </RelativeLayout>

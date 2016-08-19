@@ -33,6 +33,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(movie.getOriginalTitle());
+        collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transperent));
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -47,7 +48,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         ImageView poster = (ImageView) findViewById(R.id.poster_details);
         TextView releaseDate = (TextView) findViewById(R.id.Release_write);
         TextView rating = (TextView) findViewById(R.id.Rating_write);
-//        TextView title = (TextView) findViewById(R.id.Title_write);
+        TextView title = (TextView) findViewById(R.id.Title_write);
         TextView overview = (TextView) findViewById(R.id.overview_new);
         ImageView backdrop = (ImageView) findViewById(R.id.backdrop1);
 
@@ -63,7 +64,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         rating.setText(movie.getVoteAverage());
 
-//        title.setText(movie.getOriginalTitle());
+        title.setText(movie.getOriginalTitle());
 
         overview.setText(movie.getOverview());
 
