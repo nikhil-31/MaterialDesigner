@@ -1,6 +1,7 @@
 package com.example.nikhil.materialtester.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.nikhil.materialtester.Activity.MovieDetailsActivity;
 import com.example.nikhil.materialtester.Movie;
 import com.example.nikhil.materialtester.PopularAdapter;
 import com.example.nikhil.materialtester.R;
@@ -30,11 +32,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class FragmentTopRated extends Fragment {
+public class FragmentTopRated extends Fragment implements PopularAdapter.ClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String STATE_MOVIES_TOP = "movie_state_top";
+    private String STATE_MOVIE = "state_movies";
 
 
     private String mParam1;
@@ -78,11 +80,12 @@ public class FragmentTopRated extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_rated, container, false);
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_top_rated);
-        listMovieHits.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(),2));
         adapter = new PopularAdapter(getActivity());
+        adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
         if(savedInstanceState !=null){
-            ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES_TOP);
+            ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
             adapter.setMoviesList(ListMovies);
         }
         else {
@@ -96,7 +99,7 @@ public class FragmentTopRated extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_MOVIES_TOP,ListMovies);
+        outState.putParcelableArrayList(STATE_MOVIE,ListMovies);
     }
 
     private void sendJsonRequest() {
@@ -152,5 +155,13 @@ public class FragmentTopRated extends Fragment {
 
         return data;
 
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+        Movie mvs =ListMovies.get(position);
+        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
+        intent.putExtra("Movie", mvs);
+        startActivity(intent);
     }
 }
