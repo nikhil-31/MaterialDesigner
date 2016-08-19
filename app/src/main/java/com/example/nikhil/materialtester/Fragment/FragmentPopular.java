@@ -165,9 +165,9 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
     @Override
     public void itemClicked(View view, int position) {
-
+        Movie mvs =ListMovies.get(position);
         Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
-        intent.putParcelableArrayListExtra("Movie",ListMovies);
+        intent.putExtra("Movie", mvs);
         startActivity(intent);
 
     }
