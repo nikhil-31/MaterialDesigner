@@ -2,7 +2,6 @@ package com.example.nikhil.materialtester.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,38 +21,47 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
         Intent intent = getIntent();
-        final Movie movie = (Movie) intent.getParcelableExtra("Movie");
+        final Movie movie = intent.getParcelableExtra("Movie");
 
-//        ImageView poster = (ImageView) findViewById(R.id.poster_details);
-//        TextView releaseDate = (TextView) findViewById(R.id.Release_write);
-//        TextView rating = (TextView) findViewById(R.id.Rating_write);
-//        TextView title = (TextView) findViewById(R.id.Title_write);
-//        TextView overview = (TextView) findViewById(R.id.Overview_write);
-        ImageView backdrop = (ImageView) findViewById(R.id.backdrop1);
+        ImageView poster = (ImageView) findViewById(R.id.poster_details);
+        TextView releaseDate = (TextView) findViewById(R.id.Release_write);
+        TextView rating = (TextView) findViewById(R.id.Rating_write);
+        TextView title = (TextView) findViewById(R.id.Title_write);
+        TextView overview = (TextView) findViewById(R.id.Overview_write);
+        ImageView backdrop = (ImageView) findViewById(R.id.backdrop);
 
-//        Picasso.with(this)
-//                .load(movie.getPosterPath())
-//                .into(poster);
+        Picasso.with(this)
+                .load(movie.getPosterPath())
+                .into(poster);
 
         Picasso.with(this)
                 .load(movie.getBackdrop())
                 .into(backdrop);
 
-//        releaseDate.setText(movie.getReleaseDate());
-//
-//        rating.setText(movie.getVoteAverage());
-//
-//        title.setText(movie.getOriginalTitle());
-//
-//        overview.setText(movie.getOverview());
-//
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(movie.getOriginalTitle());
+        releaseDate.setText(movie.getReleaseDate());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        rating.setText(movie.getVoteAverage());
+
+        title.setText(movie.getOriginalTitle());
+
+        overview.setText(movie.getOverview());
+
+
 
 
     }
