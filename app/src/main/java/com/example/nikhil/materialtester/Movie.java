@@ -66,8 +66,8 @@ public class Movie implements Parcelable {
 
     }
 
-    public String getVoteAverage() {
-        String rating = mVoteAverage + "/10";
+    public Float getVoteAverage() {
+        Float rating = mVoteAverage/2;
         return rating;
     }
 

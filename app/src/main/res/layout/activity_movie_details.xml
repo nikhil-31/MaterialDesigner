@@ -133,7 +133,13 @@
                             android:id="@+id/Rating_write"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="8.2/10" />
+                             />
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:rating="4"
+                            android:id="@+id/Rating_text"/>
+
 
                     </RelativeLayout>
                 </LinearLayout>

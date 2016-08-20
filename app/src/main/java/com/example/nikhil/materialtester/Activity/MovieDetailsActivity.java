@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.nikhil.materialtester.Movie;
@@ -51,6 +52,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.Title_write);
         TextView overview = (TextView) findViewById(R.id.overview_new);
         ImageView backdrop = (ImageView) findViewById(R.id.backdrop1);
+        RatingBar ratingBar= (RatingBar) findViewById(R.id.Rating_text);
 
         Picasso.with(this)
                 .load(movie.getPosterPath())
@@ -62,7 +64,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         releaseDate.setText(movie.getReleaseDate());
 
-        rating.setText(movie.getVoteAverage());
+//        rating.setText(movie.getVoteAverage());
+
+        ratingBar.setRating(movie.getVoteAverage());
 
         title.setText(movie.getOriginalTitle());
 
