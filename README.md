@@ -2,7 +2,7 @@
 
 ##Overview
 
-An application that i used to learn material design concepts like the navigation drawer, recycler view, card view, viewpager, floating action button, collapsing toolbar, material tab library, rating bar and many more
+An application that i developed to learn material design concepts like the navigation drawer, recycler view, card view, viewpager, floating action button, collapsing toolbar, material tab library, rating bar and many more
 
 ##Screenshots
 
